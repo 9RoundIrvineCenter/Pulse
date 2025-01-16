@@ -3,16 +3,27 @@
 <head>
   <title>Get Stronger Challenge</title>
   <style>
-    /* Remove default margins and padding from body */
-    body {
-      background-color: #000000; /* Set background to black */
+    /* Set the entire page background to black */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black; /* Set background to black */
+      color: white; /* Text color to white for visibility on black background */
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Prevents scrollbars if content exceeds window size */
     }
     
-    /* Style for the iframe to ensure it fits and resizes with the page */
-    iframe {
+    /* Style for the iframe to ensure it centers and scales */
+    #sheetFrame {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       border: none; /* Remove iframe border if any */
+      background-color: transparent; /* Ensure iframe background is transparent */
     }
 
     #top-bar {
@@ -27,11 +38,11 @@
   <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=1683515524&single=true&widget=true&headers=false"></iframe>
 
   <script>
-    // Function to resize the iframe to fit the window
+    // Function to ensure the iframe fills the window
     function resizeIframe() {
       var iframe = document.getElementById('sheetFrame');
-      iframe.style.height = window.innerHeight + 'px';
-      iframe.style.width = window.innerWidth + 'px';
+      iframe.style.width = '100vw';
+      iframe.style.height = '100vh';
     }
 
     // Call the resize function when the page loads
