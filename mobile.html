@@ -11,42 +11,5 @@
 
   <div id="top-bar"></div> <!-- Keep this as is -->
 
-  <script>
-    // Variable to track touch start position
-    let startY;
-    
-    // Function to handle touch start
-    function touchStart(e) {
-      startY = e.touches[0].pageY;
-    }
-    
-    // Function to handle touch move
-    function touchMove(e) {
-      let currentY = e.touches[0].pageY;
-      // Check if the user is pulling down from the top
-      if (currentY - startY > 100 && window.scrollY === 0) {
-        document.getElementById('pull-to-refresh').style.display = 'flex';
-      } else {
-        document.getElementById('pull-to-refresh').style.display = 'none';
-      }
-    }
-    
-    // Function to handle touch end
-    function touchEnd(e) {
-      let endY = e.changedTouches[0].pageY;
-      if (endY - startY > 100 && window.scrollY === 0) {
-        // Refresh the iframe or the page
-        document.getElementById('sheetFrame').contentWindow.location.reload(true);
-        // Optionally, you could refresh the entire page instead:
-        // location.reload(true);
-        document.getElementById('pull-to-refresh').style.display = 'none';
-      }
-    }
-    
-    // Add event listeners
-    document.addEventListener('touchstart', touchStart);
-    document.addEventListener('touchmove', touchMove);
-    document.addEventListener('touchend', touchEnd);
-  </script>
 </body>
 </html>
