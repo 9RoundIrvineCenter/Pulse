@@ -12,16 +12,28 @@ html, body {
   overflow: hidden; /* Prevents scrollbars if content exceeds window size */
 }
 
-/* Style for the iframe to ensure it centers and scales */
+/* This might not work due to iframe restrictions but is a conceptual approach */
 #sheetFrame {
-  position: fixed; /* Changed to fixed for better full-screen behavior */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  border: none; /* Remove iframe border if any */
-  background-color: transparent; /* Ensure iframe background is transparent */
-  z-index: 1; /* Ensure iframe is on top of any other content */
+  border: none;
+  background-color: transparent;
+  z-index: 1;
+}
+
+/* Attempt to cover the bottom part */
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 26px; /* Adjust the height to match the unwanted element's height */
+  background-color: black;
+  z-index: 2; /* Ensure this is above the iframe */
 }
 
 /* Additional style to hide any potential white space or borders from Google Sheets */
