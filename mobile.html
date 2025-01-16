@@ -8,8 +8,26 @@
   <!-- Embed the iframe with the Google Sheet -->
   <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=1297892677&single=true&widget=false&headers=false&chrome=false"></iframe>
 
-
   <div id="top-bar"></div> <!-- Added for demonstration, adjust as needed -->
+
+  <script>
+    // Function to hide mobile address bar
+    function hideAddressBar() {
+      // Check if it's a mobile device
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        // Scroll down by 1 pixel to hide the address bar
+        setTimeout(function() {
+          window.scrollTo(0, 1);
+        }, 0);
+      }
+    }
+
+    // Hide address bar on page load
+    window.addEventListener('load', hideAddressBar);
+
+    // Hide address bar on scroll
+    window.addEventListener('scroll', hideAddressBar);
+  </script>
 
 </body>
 </html>
