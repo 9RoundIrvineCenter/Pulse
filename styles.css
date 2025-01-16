@@ -14,16 +14,34 @@ html, body {
 
 /* Style for the iframe to ensure it centers and scales */
 #sheetFrame {
-  position: absolute;
+  position: fixed; /* Changed to fixed for better full-screen behavior */
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   border: none; /* Remove iframe border if any */
   background-color: transparent; /* Ensure iframe background is transparent */
+  z-index: 1; /* Ensure iframe is on top of any other content */
+}
+
+/* Additional style to hide any potential white space or borders from Google Sheets */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  z-index: 0;
 }
 
 #top-bar {
   border-bottom: 1px solid #000000;
   background-color: #000000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2; /* Ensure top-bar is above iframe */
 }
