@@ -1,21 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Embedded Google Sheet</title>
+  <title>Get Stronger Challenge</title>
   <style>
+    /* Remove default margins and padding from body */
     body {
       margin: 0;
       padding: 0;
       background-color: black; /* Set background to black */
+      color: white; /* Text color to white for visibility on black background */
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Prevents scrollbars if content exceeds window size */
     }
+    
+    /* Style for the iframe to ensure it fits and resizes with the page */
     iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 100vh; /* Full viewport height */
+      height: 100%;
       border: none; /* Remove iframe border if any */
     }
   </style>
 </head>
 <body>
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=1683515524&amp;single=true&amp;widget=true&amp;headers=true"></iframe>
+  <!-- Embed the iframe with the Google Sheet -->
+  <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=1683515524&single=true&widget=true&headers=true"></iframe>
+
+  <script>
+    // Function to resize the iframe to fit the window
+    function resizeIframe() {
+      var iframe = document.getElementById('sheetFrame');
+      iframe.style.height = window.innerHeight + 'px';
+      iframe.style.width = window.innerWidth + 'px';
+    }
+
+    // Call the resize function when the page loads
+    window.onload = resizeIframe;
+    
+    // Call the resize function when the window is resized
+    window.addEventListener('resize', resizeIframe);
+  </script>
 </body>
 </html>
