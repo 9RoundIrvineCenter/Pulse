@@ -2,32 +2,51 @@
 <html>
 <head>
   <title>9Round Irvine Center Pulse Challenge</title>
-  <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Make sure this path is correct -->
+  <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Ensure this path is correct -->
 </head>
 <body>
+  <div id="pull-to-refresh">Pull to Refresh</div>
   <!-- Embed the iframe with the Google Sheet -->
   <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=1297892677&single=true&widget=false&headers=false&chrome=false"></iframe>
 
-  <div id="top-bar"></div> <!-- Added for demonstration, adjust as needed -->
+  <div id="top-bar"></div> <!-- Keep this as is -->
 
   <script>
-    // Function to hide mobile address bar
-    function hideAddressBar() {
-      // Check if it's a mobile device
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        // Scroll down by 1 pixel to hide the address bar
-        setTimeout(function() {
-          window.scrollTo(0, 1);
-        }, 0);
+    // Variable to track touch start position
+    let startY;
+    
+    // Function to handle touch start
+    function touchStart(e) {
+      startY = e.touches[0].pageY;
+    }
+    
+    // Function to handle touch move
+    function touchMove(e) {
+      let currentY = e.touches[0].pageY;
+      // Check if the user is pulling down from the top
+      if (currentY - startY > 100 && window.scrollY === 0) {
+        document.getElementById('pull-to-refresh').style.display = 'flex';
+      } else {
+        document.getElementById('pull-to-refresh').style.display = 'none';
       }
     }
-
-    // Hide address bar on page load
-    window.addEventListener('load', hideAddressBar);
-
-    // Hide address bar on scroll
-    window.addEventListener('scroll', hideAddressBar);
+    
+    // Function to handle touch end
+    function touchEnd(e) {
+      let endY = e.changedTouches[0].pageY;
+      if (endY - startY > 100 && window.scrollY === 0) {
+        // Refresh the iframe or the page
+        document.getElementById('sheetFrame').contentWindow.location.reload(true);
+        // Optionally, you could refresh the entire page instead:
+        // location.reload(true);
+        document.getElementById('pull-to-refresh').style.display = 'none';
+      }
+    }
+    
+    // Add event listeners
+    document.addEventListener('touchstart', touchStart);
+    document.addEventListener('touchmove', touchMove);
+    document.addEventListener('touchend', touchEnd);
   </script>
-
 </body>
 </html>
