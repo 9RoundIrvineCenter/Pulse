@@ -57,3 +57,19 @@ body::before {
   width: 100%;
   z-index: 2; /* Ensure top-bar is above iframe */
 }
+
+/* Add this inline style for the pull-to-refresh container */
+#pull-to-refresh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: none;
+  background-color: rgba(0,0,0,0.5); /* Semi-transparent background */
+  color: white;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
