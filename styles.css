@@ -62,7 +62,11 @@ body::before {
 }
 
 .switcherOuter {
+  position: fixed !important;
   display: none !important;
   visibility: hidden !important;
   z-index: 3 !important; 
+  background-color: black !important;
+  border: none !important;
+  pointer-events: none !important;
 }
