@@ -50,10 +50,11 @@ body::before {
 
 #top-bar {
   border-bottom: 1px solid #000000;
+  padding: 0px;
   background-color: #000000;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 2; /* Ensure top-bar is above iframe */
+  z-index: -1; /* Ensure top-bar is above iframe */
 }
