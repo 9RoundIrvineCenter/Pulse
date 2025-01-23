@@ -10,5 +10,16 @@
 
   <div id="top-bar"></div> <!-- Added for demonstration, adjust as needed -->
 
+  <script>
+  // Function to refresh only the iframe content every 60 seconds
+  function refreshIframe() {
+    var iframe = document.getElementById('sheetFrame');
+    iframe.src = iframe.src; // This will reload the iframe content
+  }
+  
+  // Set the timeout to call refreshIframe after 60 seconds
+  setTimeout(refreshIframe, 60000); // 60000 milliseconds = 60 seconds
+  </script>
+
 </body>
 </html>
