@@ -25,7 +25,8 @@
       console.log("Refreshing iframe at:", now.toLocaleTimeString());
       var iframe = document.getElementById('sheetFrame');
       var timestamp = now.getTime();
-      iframe.src = iframe.src.split('?')[0] + '?t=' + timestamp;
+      // Ensure the URL parameters are correct
+      iframe.src = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=1683515524&single=true&widget=true&headers=false&chrome=false&t=" + timestamp;
     } else {
       console.log("Outside refresh hours, skipping refresh.");
     }
