@@ -44,7 +44,7 @@ body::before {
   width: 100% !important;
   height: 60px !important; /* Adjust to match or exceed the Google Sheets top bar */
   background-color: black !important;
-  z-index: 9999 !important; /* Very high z-index to ensure it's on top */
+  z-index: 3 !important; /* Very high z-index to ensure it's on top */
   border: none !important;
   pointer-events: none !important;
 }
@@ -58,5 +58,5 @@ body::before {
   height: 100vh;
   border: none;
   background-color: transparent;
-  z-index: 1 !important; /* Lower than the top-bar */
+  z-index: 4 !important; /* Lower than the top-bar */
 }
