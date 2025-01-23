@@ -61,6 +61,11 @@ body::before {
   z-index: 4 !important; /* Lower than the top-bar */
 }
 
+.grid-container {
+    overflow: visible;
+    background: #000000;
+}
+
 .switcherOuter {
   position: fixed !important;
   display: none !important;
