@@ -11,13 +11,31 @@
   <div id="top-bar"></div> <!-- Added for demonstration, adjust as needed -->
 
   <script>
-  // Function to refresh the page every 60 seconds
-  function refreshPage() {
-    location.reload(true); // true forces a hard refresh, ignoring the cache
-  }
-  
-  // Set the timeout to call refreshPage after 60 seconds
-  setTimeout(refreshPage, 60000); // 60000 milliseconds = 60 seconds
+    // Function to check if the current time is between 7 AM and 11 PM
+    function isWithinRefreshHours() {
+      const now = new Date();
+      const hours = now.getHours();
+      // Check if hours are between 7 AM (7) and 11 PM (23)
+      return hours >= 7 && hours < 23;
+    }
+
+    // Function to refresh only the iframe content
+    function refreshIframe() {
+      if (isWithinRefreshHours()) {
+        console.log("Refreshing iframe at:", now.toLocaleTimeString());
+        var iframe = document.getElementById('sheetFrame');
+        var timestamp = new Date().getTime();
+        iframe.src = iframe.src.split('?')[0] + '?t=' + timestamp;
+      } else {
+        console.log("Outside refresh hours, skipping refresh.");
+      }
+    }
+
+    // Use setInterval to check and refresh every 60 seconds
+    setInterval(refreshIframe, 60000);
+
+    // Initial check and refresh if within hours
+    refreshIframe();
   </script>
 
 </body>
