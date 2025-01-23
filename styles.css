@@ -49,6 +49,17 @@ body::before {
   pointer-events: none !important;
 }
 
+#bottom-overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 26px; /* Adjust this to match the height of the bottom bar */
+  background-color: black !important;
+  z-index: 3; /* Ensure this is above the iframe */
+  pointer-events: none; /* Allows interaction with iframe content below */
+}
+
 /* Ensure iframe is below the overlay */
 #sheetFrame {
   position: fixed;
