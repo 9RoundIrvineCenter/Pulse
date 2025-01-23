@@ -62,8 +62,8 @@ body::before {
 }
 
 .grid-container {
-    overflow: visible;
-    background: #000000;
+    overflow: visible !important;
+    background: #000000 !important;
 }
 
 .switcherOuter {
