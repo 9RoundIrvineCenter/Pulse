@@ -44,7 +44,7 @@ body::before {
   width: 100% !important;
   height: 60px !important; /* Adjust to match or exceed the Google Sheets top bar */
   background-color: black !important;
-  z-index: 3 !important; /* Very high z-index to ensure it's on top */
+  z-index: 3 !important; 
   border: none !important;
   pointer-events: none !important;
 }
@@ -64,4 +64,5 @@ body::before {
 .switcherOuter {
   display: none !important;
   visibility: hidden !important;
+  z-index: 3 !important; 
 }
