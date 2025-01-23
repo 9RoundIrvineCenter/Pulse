@@ -36,20 +36,22 @@ body::before {
   z-index: 0;
 }
 
-/* Adjust the z-index and height of the overlay to match or slightly exceed the Google Sheets top bar */
+/* Ensure the overlay matches the background */
 #top-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px; /* Increase height as needed to cover the bar */
-  background-color: black;
-  z-index: 3; /* Ensure it's above everything */
+  height: 60px; /* Adjust this height to exactly match the top bar's height */
+  background-color: black; /* Ensure this matches your background */
+  z-index: 3;
   border: none;
-  pointer-events: none; /* Allows interaction with the iframe below */
+  pointer-events: none; /* Prevents interaction with this overlay */
+  opacity: 1; /* Full opacity */
+  box-shadow: none; /* No shadow */
 }
 
-/* Adjust iframe z-index to be below the overlay */
+/* Ensure iframe is below the overlay */
 #sheetFrame {
   position: fixed;
   top: 0;
@@ -58,5 +60,5 @@ body::before {
   height: 100vh;
   border: none;
   background-color: transparent;
-  z-index: 2; /* Below the top-bar */
+  z-index: 2;
 }
