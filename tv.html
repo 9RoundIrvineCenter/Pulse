@@ -15,7 +15,6 @@
   function isWithinRefreshHours() {
     const now = new Date();
     const hours = now.getHours();
-    // Check if hours are between 7 AM (7) and 11 PM (23)
     return hours >= 7 && hours < 23;
   }
 
