@@ -70,3 +70,7 @@ body::before {
   border: none !important;
   pointer-events: none !important;
 }
+
+.ritz.grid-container {
+    background: #000000 !important;
+}
