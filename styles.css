@@ -19,9 +19,9 @@ html, body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  border: 1px solid black;
+  border: none;
   background-color: transparent;
-  z-index: 1;
+  z-index: 1; /* Below the top-bar */
 }
 
 /* Attempt to cover the bottom part */
@@ -48,7 +48,7 @@ body::before {
   z-index: 0;
 }
 
-#top-bar {
+/*#top-bar {
   border-bottom: 1px solid #000000;
   padding: 0px;
   background-color: #000000;
@@ -56,5 +56,16 @@ body::before {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: -1; /* Ensure top-bar is above iframe */
+  z-index: -1;
+} */
+
+#top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px; /* Adjust the height to match or slightly exceed the top bar's height */
+  background-color: black;
+  z-index: 2; /* Higher than the iframe's z-index */
+  border: none;
 }
