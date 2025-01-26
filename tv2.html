@@ -10,11 +10,9 @@
   <div id="top-bar"></div>  <!-- Added for demonstration, adjust as needed -->
 
   <script>
-  // Set the background color to black when the DOM content is loaded
   document.addEventListener('DOMContentLoaded', function() {
-    document.body.style.backgroundColor = 'black';
-    document.documentElement.style.backgroundColor = 'black';
-
+    setBlackBackground();
+    
     // Function to check if it's within refresh time
     function shouldRefresh() {
       const now = new Date();
@@ -34,11 +32,19 @@
         const iframe = document.getElementById('sheetFrame');
         // Reload the iframe content without reloading the entire page
         iframe.src = iframe.src;
+        // Reapply black background after refresh
+        setBlackBackground();
       }
     }
 
     // Set interval for soft refresh
     setInterval(softRefresh, 30000); // 30000 milliseconds = 30 seconds
+
+    // Function to set background color
+    function setBlackBackground() {
+      document.body.style.backgroundColor = 'black';
+      document.documentElement.style.backgroundColor = 'black';
+    }
   });
   </script>
 
