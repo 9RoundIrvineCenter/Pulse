@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>9Round Irvine Center Pulse Challenge</title>
+  <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Make sure this path is correct -->
+</head>
+<body>
+  <!-- Embed the iframe with the Google Sheet -->
+  <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=748229350&single=true&widget=false&headers=false&chrome=false" frameborder="0"></iframe>
+  <div id="top-bar"></div>  <!-- Added for demonstration, adjust as needed -->
+
+    <script>
+  // Set the background color to black when the DOM content is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.style.backgroundColor = 'black';
+      document.documentElement.style.backgroundColor = 'black';
+    });
+  </script>
+
+
+</body>
+</html>
