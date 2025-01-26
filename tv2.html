@@ -15,14 +15,22 @@
   <div id="top-bar"></div>  <!-- Added for demonstration, adjust as needed -->
 
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     setBlackBackground();
     
     let currentFrame = 'sheetFrame';
     let nextFrame = 'sheetFrame2';
   
     function shouldRefresh() {
-      // Your existing logic here
+      const now = new Date();
+      const day = now.getDay();
+      const hour = now.getHours();
+  
+      if (day >= 1 && day <= 5) { // Weekdays
+        return hour >= 7 && hour < 21;
+      } else { // Weekend
+        return hour >= 8 && hour < 18;
+      }
     }
   
     function softRefresh() {
@@ -50,18 +58,19 @@
           setTimeout(() => {
             current.style.opacity = '0'; // Fade out the current iframe
             next.style.opacity = '1'; // Fade in the new iframe
-          }, 500); // Wait for logo to fully appear before switching
-          
-          setTimeout(() => {
-            loadingOverlay.classList.remove('displayed');
-            loadingOverlay.style.pointerEvents = 'none';
-            current.style.display = 'none';
             
-            // Swap frame identifiers for next refresh
-            let temp = currentFrame;
-            currentFrame = nextFrame;
-            nextFrame = temp;
-          }, 1000); // Total duration for logo to appear and iframe to transition
+            // After iframe transition, fade out overlay
+            setTimeout(() => {
+              loadingOverlay.classList.remove('displayed');
+              loadingOverlay.style.pointerEvents = 'none';
+              current.style.display = 'none';
+              
+              // Swap frame identifiers for next refresh
+              let temp = currentFrame;
+              currentFrame = nextFrame;
+              nextFrame = temp;
+            }, 500); // Match with iframe transition duration
+          }, 500); // Wait for logo to fully appear before switching
         };
       }
     }
