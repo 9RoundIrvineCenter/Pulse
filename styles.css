@@ -96,8 +96,8 @@ body::before {
 }
 
 #loadingLogo {
-  max-width: 100px; /* Adjust based on your logo size */
-  max-height: 100px; /* Adjust based on your logo size */
+  max-width: 500px; /* Adjust based on your logo size */
+  max-height: 500px; /* Adjust based on your logo size */
   opacity: 0;
   transition: opacity 0.5s ease 0.3s; /* Add a delay for a nicer effect */
 }
