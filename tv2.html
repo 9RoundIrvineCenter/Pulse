@@ -8,6 +8,9 @@
   <!-- Embed the iframes with the Google Sheet -->
   <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=748229350&single=true&widget=false&headers=false&chrome=false" frameborder="0"></iframe>
   <iframe id="sheetFrame2" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=748229350&single=true&widget=false&headers=false&chrome=false" frameborder="0"></iframe>
+  <div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: black; z-index: 1000;">
+  <!-- Optional: Add a loading spinner or text -->
+  </div>
   <div id="top-bar"></div>  <!-- Added for demonstration, adjust as needed -->
 
   <script>
@@ -33,18 +36,22 @@
     // Function to perform soft refresh using double buffering
     function softRefresh() {
       if (shouldRefresh()) {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        loadingOverlay.style.display = 'block'; // Show loading overlay
+    
         const current = document.getElementById(currentFrame);
         const next = document.getElementById(nextFrame);
-        
-        // Start loading content in the hidden iframe
-        next.src = next.src;
+    
+        // Update next iframe's src to trigger refresh
+        next.src = next.src.split('?')[0] + '?t=' + new Date().getTime();
         next.style.display = 'block';
         next.style.animation = 'fadeIn 0.5s';
         current.style.animation = 'fadeOut 0.5s';
-        
+    
         next.onload = () => {
-          // Swap frames after animation
+          // Ensure the content is loaded before hiding the overlay
           setTimeout(() => {
+            loadingOverlay.style.display = 'none';
             current.style.display = 'none';
             // Swap frame identifiers for next refresh
             let temp = currentFrame;
