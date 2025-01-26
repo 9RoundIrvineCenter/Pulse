@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>9Round Irvine Center Pulse Challenge</title>
+  <title>9Round Irvine Center Pulse & CHOW Challenge</title>
   <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Make sure this path is correct -->
 </head>
 <body>
@@ -9,14 +9,38 @@
   <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=748229350&single=true&widget=false&headers=false&chrome=false" frameborder="0"></iframe>
   <div id="top-bar"></div>  <!-- Added for demonstration, adjust as needed -->
 
-    <script>
+  <script>
   // Set the background color to black when the DOM content is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      document.body.style.backgroundColor = 'black';
-      document.documentElement.style.backgroundColor = 'black';
-    });
-  </script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.style.backgroundColor = 'black';
+    document.documentElement.style.backgroundColor = 'black';
 
+    // Function to check if it's within refresh time
+    function shouldRefresh() {
+      const now = new Date();
+      const day = now.getDay();
+      const hour = now.getHours();
+
+      if (day >= 1 && day <= 5) { // Weekdays
+        return hour >= 7 && hour < 21;
+      } else { // Weekend
+        return hour >= 8 && hour < 18;
+      }
+    }
+
+    // Function to perform soft refresh
+    function softRefresh() {
+      if (shouldRefresh()) {
+        const iframe = document.getElementById('sheetFrame');
+        // Reload the iframe content without reloading the entire page
+        iframe.src = iframe.src;
+      }
+    }
+
+    // Set interval for soft refresh
+    setInterval(softRefresh, 30000); // 30000 milliseconds = 30 seconds
+  });
+  </script>
 
 </body>
 </html>
