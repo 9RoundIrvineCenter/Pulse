@@ -59,7 +59,7 @@ body::before {
   border: none;
   background-color: black;
   z-index: 4 !important;
-  opacity: 0; /* Start with 0 opacity */
+  opacity: 1; /* Start with full opacity, then control visibility through JS */
   transition: opacity 0.5s ease;
 }
 #sheetFrame2 {
