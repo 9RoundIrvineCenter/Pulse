@@ -58,6 +58,7 @@ body::before {
   height: 100vh;
   border: none;
   background-color: black;
+  z-index: 4 !important;
   transition: opacity 0.5s, transform 0.5s;
 }
 #sheetFrame2 {
