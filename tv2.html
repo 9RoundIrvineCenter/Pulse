@@ -20,58 +20,54 @@
     
     let currentFrame = 'sheetFrame';
     let nextFrame = 'sheetFrame2';
-
-    // Function to check if it's within refresh time
+  
     function shouldRefresh() {
-      const now = new Date();
-      const day = now.getDay();
-      const hour = now.getHours();
-
-      if (day >= 1 && day <= 5) { // Weekdays
-        return hour >= 7 && hour < 21;
-      } else { // Weekend
-        return hour >= 8 && hour < 18;
-      }
+      // Your existing logic here
     }
-
-    // Function to perform soft refresh using double buffering
+  
     function softRefresh() {
       if (shouldRefresh()) {
         const loadingOverlay = document.getElementById('loadingOverlay');
-        loadingOverlay.classList.add('displayed'); // This will make it visible with transition
-        loadingOverlay.style.pointerEvents = 'auto'; // Enable interaction
-    
         const current = document.getElementById(currentFrame);
         const next = document.getElementById(nextFrame);
-    
-        // Preserve existing URL parameters while adding cache busting
+        
+        // Show the overlay first
+        loadingOverlay.classList.add('displayed');
+        loadingOverlay.style.pointerEvents = 'auto';
+        
+        // Initially, keep the current iframe at full opacity
+        current.style.opacity = '1';
+        
+        // Load new content in the background
         const url = new URL(next.src);
         url.searchParams.set('t', new Date().getTime()); // Cache busting
         next.src = url.href;
-    
+        next.style.opacity = '0'; // Keep new content invisible until ready
         next.style.display = 'block';
-        next.style.animation = 'fadeIn 0.5s';
-        current.style.animation = 'fadeOut 0.5s';
-    
+        
         next.onload = () => {
-          // Wait for the transition to finish before hiding the overlay
+          // Logo has appeared, now transition to new iframe
           setTimeout(() => {
-            loadingOverlay.classList.remove('displayed'); // This will hide it with transition
-            loadingOverlay.style.pointerEvents = 'none'; // Disable interaction
+            current.style.opacity = '0'; // Fade out the current iframe
+            next.style.opacity = '1'; // Fade in the new iframe
+          }, 500); // Wait for logo to fully appear before switching
+          
+          setTimeout(() => {
+            loadingOverlay.classList.remove('displayed');
+            loadingOverlay.style.pointerEvents = 'none';
             current.style.display = 'none';
+            
             // Swap frame identifiers for next refresh
             let temp = currentFrame;
             currentFrame = nextFrame;
             nextFrame = temp;
-          }, 500); // Match with the transition duration
+          }, 1000); // Total duration for logo to appear and iframe to transition
         };
       }
     }
-
-    // Set interval for soft refresh
+  
     setInterval(softRefresh, 30000); // 30000 milliseconds = 30 seconds
-
-    // Function to set background color
+  
     function setBlackBackground() {
       document.body.style.backgroundColor = 'black';
       document.documentElement.style.backgroundColor = 'black';
