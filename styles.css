@@ -49,17 +49,27 @@ body::before {
   pointer-events: none !important;
 }
 
-/* Ensure iframe is below the overlay */
-#sheetFrame {
+/* Add these styles for smoother transitions */
+#sheetFrame, #sheetFrame2 {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   border: none;
-  background-color: black !important;
-  z-index: 4 !important; /* Lower than the top-bar */
-  transition: opacity 0.5s; /* Add this line for transition effect */
+  background-color: black;
+  transition: opacity 0.5s, transform 0.5s;
+}
+#sheetFrame2 {
+  display: none;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.9);}
+  to {opacity: 1; transform: scale(1);}
+}
+@keyframes fadeOut {
+  from {opacity: 1; transform: scale(1);}
+  to {opacity: 0; transform: scale(0.9);}
 }
 
 .switcherOuter {
