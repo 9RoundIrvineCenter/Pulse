@@ -5,14 +5,18 @@
   <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Make sure this path is correct -->
 </head>
 <body>
-  <!-- Embed the iframe with the Google Sheet -->
-  <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=748229350&single=true&widget=false&headers=false&chrome=false" frameborder="0" style="background-color: black;"></iframe>
+  <!-- Embed the iframes with the Google Sheet -->
+  <iframe id="sheetFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=748229350&single=true&widget=false&headers=false&chrome=false" frameborder="0"></iframe>
+  <iframe id="sheetFrame2" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQ2ZHMxBUYYGkZ2z59Kqd94GumA60KdJ4WkzE3ysHfNgmpyrI5vyGM633foL3cJr_YNOUFJ-bPU_Kd/pubhtml?gid=748229350&single=true&widget=false&headers=false&chrome=false" frameborder="0"></iframe>
   <div id="top-bar"></div>  <!-- Added for demonstration, adjust as needed -->
 
   <script>
   document.addEventListener('DOMContentLoaded', function() {
     setBlackBackground();
     
+    let currentFrame = 'sheetFrame';
+    let nextFrame = 'sheetFrame2';
+
     // Function to check if it's within refresh time
     function shouldRefresh() {
       const now = new Date();
@@ -26,18 +30,28 @@
       }
     }
 
-    // Function to perform soft refresh
+    // Function to perform soft refresh using double buffering
     function softRefresh() {
       if (shouldRefresh()) {
-        const iframe = document.getElementById('sheetFrame');
-        iframe.style.opacity = '0'; // Make iframe invisible while loading
-        setTimeout(() => {
-          iframe.src = iframe.src;
-          iframe.onload = () => {
-            iframe.style.opacity = '1'; // Make visible once loaded
-          };
-        }, 100); // Small delay to ensure the browser has time to process the opacity change
-        setBlackBackground(); // Ensure background stays black
+        const current = document.getElementById(currentFrame);
+        const next = document.getElementById(nextFrame);
+        
+        // Start loading content in the hidden iframe
+        next.src = next.src;
+        next.style.display = 'block';
+        next.style.animation = 'fadeIn 0.5s';
+        current.style.animation = 'fadeOut 0.5s';
+        
+        next.onload = () => {
+          // Swap frames after animation
+          setTimeout(() => {
+            current.style.display = 'none';
+            // Swap frame identifiers for next refresh
+            let temp = currentFrame;
+            currentFrame = nextFrame;
+            nextFrame = temp;
+          }, 500); // Match with animation duration
+        };
       }
     }
 
