@@ -59,6 +59,7 @@ body::before {
   border: none;
   background-color: black;
   z-index: 4 !important;
+  opacity: 0; /* Start with 0 opacity */
   transition: opacity 0.5s ease;
 }
 #sheetFrame2 {
@@ -83,11 +84,11 @@ body::before {
   background-color: black;
   z-index: 1000;
   opacity: 0;
-  transition: opacity 0.5s ease;
-  display: flex; /* Use flexbox for centering */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
 #loadingOverlay.displayed {
@@ -98,7 +99,7 @@ body::before {
 #loadingLogo {
   max-width: 500px; /* Adjust based on your logo size */
   max-height: 500px; /* Adjust based on your logo size */
-  opacity: 0;
+  opacity: 0.5;
   transition: opacity 0.5s ease 0.3s; /* Add a delay for a nicer effect */
 }
 
