@@ -43,9 +43,6 @@
         loadingOverlay.classList.add('displayed');
         loadingOverlay.style.pointerEvents = 'auto';
         
-        // Initially, keep the current iframe at full opacity
-        current.style.opacity = '1';
-        
         // Load new content in the background
         const url = new URL(next.src);
         url.searchParams.set('t', new Date().getTime()); // Cache busting
