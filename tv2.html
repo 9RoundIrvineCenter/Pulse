@@ -38,16 +38,19 @@
       if (shouldRefresh()) {
         const loadingOverlay = document.getElementById('loadingOverlay');
         loadingOverlay.style.display = 'block'; // Show loading overlay
-    
+        
         const current = document.getElementById(currentFrame);
         const next = document.getElementById(nextFrame);
-    
-        // Update next iframe's src to trigger refresh
-        next.src = next.src.split('?')[0] + '?t=' + new Date().getTime();
+        
+        // Preserve existing URL parameters while adding cache busting
+        const url = new URL(next.src);
+        url.searchParams.set('t', new Date().getTime()); // Cache busting
+        next.src = url.href;
+        
         next.style.display = 'block';
         next.style.animation = 'fadeIn 0.5s';
         current.style.animation = 'fadeOut 0.5s';
-    
+        
         next.onload = () => {
           // Ensure the content is loaded before hiding the overlay
           setTimeout(() => {
