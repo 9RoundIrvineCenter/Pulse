@@ -99,12 +99,12 @@ body::before {
 #loadingLogo {
   max-width: 500px; /* Adjust based on your logo size */
   max-height: 500px; /* Adjust based on your logo size */
-  opacity: 0.5;
+  opacity: 0.5; /* Dim the logo by setting opacity to 50% */
   transition: opacity 0.5s ease 0.3s; /* Add a delay for a nicer effect */
 }
 
 #loadingOverlay.displayed #loadingLogo {
-  opacity: 1;
+  opacity: 0.5; /* Keep the dim appearance when overlay is displayed */
 }
 
 .switcherOuter {
