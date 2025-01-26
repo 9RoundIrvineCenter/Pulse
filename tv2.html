@@ -30,10 +30,14 @@
     function softRefresh() {
       if (shouldRefresh()) {
         const iframe = document.getElementById('sheetFrame');
-        // Reload the iframe content without reloading the entire page
-        iframe.src = iframe.src;
-        // Reapply black background after refresh
-        setBlackBackground();
+        iframe.style.opacity = '0'; // Make iframe invisible while loading
+        setTimeout(() => {
+          iframe.src = iframe.src;
+          iframe.onload = () => {
+            iframe.style.opacity = '1'; // Make visible once loaded
+          };
+        }, 100); // Small delay to ensure the browser has time to process the opacity change
+        setBlackBackground(); // Ensure background stays black
       }
     }
 
