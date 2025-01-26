@@ -37,30 +37,32 @@
     function softRefresh() {
       if (shouldRefresh()) {
         const loadingOverlay = document.getElementById('loadingOverlay');
-        loadingOverlay.style.display = 'block'; // Show loading overlay
-        
+        loadingOverlay.classList.add('displayed'); // This will make it visible with transition
+        loadingOverlay.style.pointerEvents = 'auto'; // Enable interaction
+    
         const current = document.getElementById(currentFrame);
         const next = document.getElementById(nextFrame);
-        
+    
         // Preserve existing URL parameters while adding cache busting
         const url = new URL(next.src);
         url.searchParams.set('t', new Date().getTime()); // Cache busting
         next.src = url.href;
-        
+    
         next.style.display = 'block';
         next.style.animation = 'fadeIn 0.5s';
         current.style.animation = 'fadeOut 0.5s';
-        
+    
         next.onload = () => {
-          // Ensure the content is loaded before hiding the overlay
+          // Wait for the transition to finish before hiding the overlay
           setTimeout(() => {
-            loadingOverlay.style.display = 'none';
+            loadingOverlay.classList.remove('displayed'); // This will hide it with transition
+            loadingOverlay.style.pointerEvents = 'none'; // Disable interaction
             current.style.display = 'none';
             // Swap frame identifiers for next refresh
             let temp = currentFrame;
             currentFrame = nextFrame;
             nextFrame = temp;
-          }, 500); // Match with animation duration
+          }, 500); // Match with the transition duration
         };
       }
     }
